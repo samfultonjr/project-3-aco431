@@ -28,10 +28,20 @@ distinguished_name  = ca_dn
 x509_extensions     = v3_ca
 
 [ ca_dn ]
-CN = YourGroupName Root CA
+CN = SamFultonGroup Root CA
 
 [ v3_ca ]
 basicConstraints = critical, CA:true
 keyUsage = critical, keyCertSign, cRLSign
 subjectKeyIdentifier = hash
 authorityKeyIdentifier = keyid:always,issuer
+
+[ server_ext ]
+basicConstraints = CA:false
+keyUsage = digitalSignature, keyEncipherment
+extendedKeyUsage = serverAuth
+subjectAltName = @server_alt_names
+
+[ server_alt_names ]
+DNS.1 = www.SamFultonGroup.com
+DNS.2 = SamFultonGroup.com
