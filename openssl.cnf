@@ -1,0 +1,37 @@
+[ ca ]
+default_ca = my_ca
+
+[ my_ca ]
+dir               = /home/kali/myCA
+database          = $dir/index.txt
+new_certs_dir     = $dir/newcerts
+certificate       = $dir/certs/ca.crt
+serial            = $dir/serial
+private_key       = $dir/private/ca.key.pem
+default_days      = 3650
+default_md        = sha256
+policy            = my_ca_policy
+x509_extensions   = v3_ca
+
+[ my_ca_policy ]
+commonName             = supplied
+countryName            = optional
+stateOrProvinceName    = optional
+organizationName       = optional
+organizationalUnitName = optional
+
+[ req ]
+default_bits        = 4096
+prompt              = no
+default_md          = sha256
+distinguished_name  = ca_dn
+x509_extensions     = v3_ca
+
+[ ca_dn ]
+CN = YourGroupName Root CA
+
+[ v3_ca ]
+basicConstraints = critical, CA:true
+keyUsage = critical, keyCertSign, cRLSign
+subjectKeyIdentifier = hash
+authorityKeyIdentifier = keyid:always,issuer
